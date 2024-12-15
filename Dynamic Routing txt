@@ -25,6 +25,7 @@ ROUTER0(CONFIG)#router ospf 1
 
 #network 10.0.0.0   0.255.255.255   area 0
 #network 12.0.0.0   0.255.255.255   area 0
+#exit
 
 
 ROUTER 1:
@@ -33,6 +34,7 @@ ROUTER1(CONFIG)#router ospf 1
 
 #network 11.0.0.0   0.255.255.255   area 0
 #network 12.0.0.0   0.255.255.255   area 0
+#exit
 
 
 
