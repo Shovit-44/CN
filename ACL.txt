@@ -1,0 +1,15 @@
+#access-list 1 deny host 10.10.10.2
+
+#access-list 1 permit host 10.10.10.3
+
+#exit
+
+#configure terminal
+
+#int gig0/0/1
+
+#ip access-group 1 in
+
+#exit
+
+#do show runn
