@@ -1,0 +1,57 @@
+USING RIP COMMAND
+
+ROUTER 0
+
+Router0(config)#router rip
+#version 2
+#network 10.0.0.0
+#network 12.0.0.0
+
+
+ROUTER 1
+
+Router1(config)#router rip
+#version 2
+#network 11.0.0.0
+#network 12.0.0.0
+
+
+
+USING OSPF COMMAND 
+
+ROUTER 0:
+
+ROUTER0(CONFIG)#router ospf 1
+
+#network 10.0.0.0   0.255.255.255   area 0
+#network 12.0.0.0   0.255.255.255   area 0
+
+
+ROUTER 1:
+
+ROUTER1(CONFIG)#router ospf 1
+
+#network 11.0.0.0   0.255.255.255   area 0
+#network 12.0.0.0   0.255.255.255   area 0
+
+
+
+USING BGP COMMAND
+
+ROUTER 0
+
+ROUTER0(CONFIG)#router bgp 10
+#network 10.0.0.0
+#network 11.0.0.0
+#network 12.0.0.0
+#neighbor 12.0.0.2 remote-as 20
+#neighbor 11.0.0.2 remote-as 20
+
+ROUTER 1
+
+ROUTER1(CONFIG)#router bgp 20
+#network 10.0.0.0
+#network 11.0.0.0
+#network 12.0.0.0
+#neighbor 12.0.0.1 remote-as 10
+#neighbor 10.0.0.2 remote-as 10

@@ -1,0 +1,103 @@
+CONFIGURING NETWORK 
+
+PC0:  
+
+-click on pc0 (network address: 10.0.0.0) 
+
+-go to ip configuration 
+
+-set ip address: 10.0.0.2 
+
+-subnet mask: 255.0.0.0 
+
+-default gateway: 10.0.0.1 
+
+
+
+PC1: 
+
+-click on pc0 (network address: 11.0.0.0) 
+
+-go to ip configuration 
+
+-set ip address: 11.0.02 
+
+-subnet mask: 255.0.0.0 
+
+-default gateway: 11.0.0.1 
+
+
+
+
+ROUTER 0(above pc0) 
+
+-enable      // access to privilege mode
+
+-config terminal 
+
+-interface gig0/0/0 
+
+-ip address 10.0.0.1 255.0.0.0 
+
+-no shutdown  // to bring the interface up from the shutdown state on an interface which default on the routers
+
+-exit 
+
+-interface gig0/0/1 
+
+-ip address 12.0.0.1 255.0.0.0 
+
+-no shutdown 
+
+-exit 
+
+
+
+ROUTER 1(above pc1) 
+
+-enable 
+
+-config terminal 
+
+-interface gig0/0/0 
+
+-ip address 12.0.0.2 255.0.0.0 
+
+-no shutdown 
+
+-exit 
+
+-interface gig0/0/1 
+
+-ip address 11.0.0.1 255.0.0.0 
+
+-no shutdown 
+
+-exit 
+
+
+
+//NOW IF WE PING FROM PC0 TO PC1 THEY WILL NOT COMMUNICATE BECAUSE THEY DONT KNOW ROUTE OF EACH OTHER. SO WE NEED TO DO STATIC ROUTING .// 
+
+ 
+
+COMMAND FOR STATIC ROUTING 
+
+ROUTER<CONFIG> IP ROUTE <NETWORK ADDRESS OF OTHERS> <SUBNET MASK> <NEXT HOP ADDRESS> 
+
+
+ROUTER 0 
+
+Router(config)#ip route 11.0.0.0 255.0.0.0 12.0.0.2 
+
+Router(config)#ip route 12.0.0.0 255.0.0.0 12.0.0.2 
+
+
+
+ROUTER 1 
+
+Router(config)#ip route 10.0.0.0 255.0.0.0 12.0.0.1 
+
+Router(config)#ip route 12.0.0.0 255.0.0.0 12.0.0.1 
+
+//NOW BOTH ROUTER KNOW ROUTE OF EACH OTHER// 
